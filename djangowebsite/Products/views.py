@@ -59,3 +59,6 @@ def product_list_view(request):
         "object_list": queryset
     }
     return render(request, "products/products_list.html", context)
+
+def cart_view(request):
+    return
