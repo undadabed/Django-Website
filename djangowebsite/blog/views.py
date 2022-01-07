@@ -1,12 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import (CreateView, DetailView, ListView, UpdateView, ListView, DeleteView)
 
 from .models import Article
 from .forms import ArticleModelForm
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     template_name = 'articles/article_create.html'
     form_class = ArticleModelForm
     queryset = Article.objects.all()
@@ -40,7 +43,9 @@ class ArticleDetailView(DetailView):
         id_ = self.kwargs.get("id")
         return get_object_or_404(Article, id=id_)
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
     template_name = 'articles/article_delete.html'
 
     def get_object(self):

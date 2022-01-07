@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
+from django.contrib.auth.decorators import login_required
 
 from .forms import ProductForm
 
@@ -15,6 +16,7 @@ from .forms import ProductForm
 #    }
 #    return render(request, "products/product_create.html", context)
 
+@login_required(login_url='/login')
 def product_create_view(request):
     form = ProductForm(request.POST or None)
     if form.is_valid():
@@ -43,13 +45,14 @@ def product_detail_view(request, id):
     }
     return render(request, "products/product_detail.html", context)
 
+@login_required(login_url='/login')
 def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
     if request.method == "POST":
         obj.delete()
         return redirect('../../')
     context = {
-        "ojbect":obj
+        "object":obj
     }
     return render(request, "products/product_delete.html", context)
 

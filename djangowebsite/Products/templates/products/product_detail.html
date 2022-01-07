@@ -1,5 +1,18 @@
 {% extends 'base.html' %} {% block content %}
-<h1>In template app:{{ object.title }}</h1>
-<p>{{ object.description }}</p>
+<h1>{{ object.title }}</h1>
+<img class="profile-pic" src="{{ object.display_image.url }}" />
 <p>${{ object.price }}</p>
+<p>{{ object.description }}</p>
+<a
+  class="nav-item nav-link"
+  id="Delete-item"
+  href="{{ object.get_absolute_url }}update"
+  >Update Item</a
+>
+<a
+  class="nav-item nav-link"
+  id="Delete-item"
+  href="{{ object.get_absolute_url }}delete"
+  >Delete Item</a
+>
 {% endblock %}

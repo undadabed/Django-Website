@@ -38,6 +38,7 @@ class ProductForm(forms.ModelForm):
             'description',
             'price',
             'summary',
+            'display_image',
         ]
 
 #class RawProductForm(forms.Form):
