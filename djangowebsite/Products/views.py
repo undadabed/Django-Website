@@ -18,7 +18,7 @@ from .forms import ProductForm
 
 @login_required(login_url='/login')
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
+    form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save();
         form = ProductForm()
