@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.deletion import CASCADE
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -10,6 +11,7 @@ class Product(models.Model):
     summary = models.TextField(blank=True)
     featured = models.BooleanField(default=False)
     display_image = models.ImageField(null=True, blank=True, default='default.jpg')
+    seller = models.ForeignKey(User, on_delete=CASCADE, default=1)
 
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"id": self.id})

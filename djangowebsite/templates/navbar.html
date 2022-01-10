@@ -13,13 +13,9 @@
       <a class="nav-item nav-link" id="about" href="/about">About</a>
       <a class="nav-item nav-link" id="contact" href="/contact">Contact</a>
       <a class="nav-item nav-link" id="products" href="/products">Products</a>
-      <a class="nav-item nav-link" id="blog" href="/blog">Blogs</a>
       {% if user.is_authenticated %}
       <a class="nav-item nav-link" id="products-create" href="/products/create"
         >Sell a Product</a
-      >
-      <a class="nav-item nav-link" id="blog-create" href="/blog/create"
-        >Upload a Blog</a
       >
       <a class="nav-item nav-link" id="Logout" href="/logout">Logout</a>
       {% else %}
