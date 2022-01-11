@@ -1,7 +1,12 @@
 {% extends 'base.html' %} {% block content %} {% for instance in object_list %}
-<h2>
+<h4>
   <a href="{{ instance.get_absolute_url }}">{{ instance.title }}</a>
-</h2>
-<h3>${{ instance.price }}</h3>
-<img class="profile-pic" src="{{ instance.display_image.url }}" />
+</h4>
+<p>${{ instance.price }}</p>
+<img
+  class="profile-pic"
+  src="{{ instance.display_image.url }}"
+  width="200"
+  height="200"
+/>
 {% endfor %} {% endblock %}

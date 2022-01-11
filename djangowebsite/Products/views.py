@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import ProductForm
 
@@ -20,17 +21,24 @@ from .forms import ProductForm
 def product_create_view(request):
     form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid():
-        form.save();
-        form = ProductForm()
+        #form.save();
+        #form = ProductForm()
+        current_form = form.save(commit=False)
+        current_form.seller = request.user
+        current_form.save()
+        return redirect('/')
 
     context = {
         'form': form
     }
     return render(request, "products/product_create.html", context)
 
+@login_required(login_url='/login')
 def product_update_view(request, id=id):
     obj = get_object_or_404(Product, id=id)
-    form = ProductForm(request.POST or None, instance=obj)
+    if not obj.seller == request.user:
+        return redirect('../')
+    form = ProductForm(request.POST or None, request.FILES or None, instance=obj)
     if form.is_valid():
         form.save()
     context = {
@@ -48,9 +56,11 @@ def product_detail_view(request, id):
 @login_required(login_url='/login')
 def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
+    if not obj.seller == request.user:
+        return redirect('../')
     if request.method == "POST":
         obj.delete()
-        return redirect('../../')
+        return redirect('')
     context = {
         "object":obj
     }

@@ -1,8 +1,14 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{{ object.title }}</h1>
-<img class="profile-pic" src="{{ object.display_image.url }}" />
+<h2>{{ object.title }}</h2>
 <p>${{ object.price }}</p>
 <p>{{ object.description }}</p>
+<img
+  class="profile-pic"
+  src="{{ object.display_image.url }}"
+  width="400"
+  height="400"
+/>
+<p>{{ object.summary }}</p>
 <a
   class="nav-item nav-link"
   id="Delete-item"

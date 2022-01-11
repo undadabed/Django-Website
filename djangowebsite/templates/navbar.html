@@ -23,5 +23,10 @@
       <a class="nav-item nav-link" id="Register" href="/register">Register</a>
       {% endif %}
     </div>
+    {% if user.is_authenticated %}
+    <div class="navbar-nav ml-auto">
+      <a class="nav-link" href="/products">{{ user }}</a>
+    </div>
+    {% endif %}
   </div>
 </nav>

@@ -16,9 +16,13 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("products:product-detail", kwargs={"id": self.id})
 
+class OrderItem(models.Model):
+    STATUS = (('Pending','Pending'),('Out for delivery','Out for delivery'),('Delivered','Delivered'))
+    customer = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    item = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
 class Cart():
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
+    items = models.ManyToManyField(OrderItem)
+    total_price = models.IntegerField()

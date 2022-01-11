@@ -22,3 +22,6 @@ def register(response):
         form = RegisterForm()
 
     return render(response, "registration/register.html", {'form':form})
+
+def cart(request):
+    return render(request, "cart.html", {})
