@@ -73,5 +73,11 @@ def product_list_view(request):
     }
     return render(request, "products/products_list.html", context)
 
+@login_required(login_url='/login')
 def cart_view(request):
-    return
+    user = request.user
+    cart = Product.objects.filter(seller=user.id)
+    context = {
+        "object_list": cart
+    }
+    return render(request, "products/cart.html", context)

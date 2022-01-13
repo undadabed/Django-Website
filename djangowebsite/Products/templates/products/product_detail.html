@@ -8,6 +8,7 @@
   width="400"
   height="400"
 />
+{% if user == object.seller %}
 <p>{{ object.summary }}</p>
 <a
   class="nav-item nav-link"
@@ -21,4 +22,4 @@
   href="{{ object.get_absolute_url }}delete"
   >Delete Item</a
 >
-{% endblock %}
+{% endif %} {% endblock %}
