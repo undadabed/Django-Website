@@ -2,6 +2,7 @@
 <form method="post" enctype="multipart/form-data" class="form-group">
   {% csrf_token %}
   <h1>Do you want to purchase the product "{{ object.title }}"?</h1>
+  <p>${{ object.price }} each</p>
   {{ form|crispy }}
   <button type="submit" class="btn btn-success">Purchase</button>
   <a href="../">Cancel</a>

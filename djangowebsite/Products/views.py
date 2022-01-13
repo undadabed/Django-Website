@@ -65,6 +65,7 @@ def product_purchase_view(request, id):
         current_form.item = obj
         current_form.save()
     context = {
+        'object': obj,
         'form': form
     }
     return render(request, "products/product_purchase.html", context)
