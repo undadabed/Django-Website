@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product
+from .models import Product, OrderItem
 
 class ProductForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Title"}))
@@ -41,18 +41,9 @@ class ProductForm(forms.ModelForm):
             'display_image',
         ]
 
-#class RawProductForm(forms.Form):
-#    title = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Title"}))
-#    description = forms.CharField(
-#        required=False, 
-#        widget=forms.Textarea(
-#            attrs={
-#                "placeholder": "Description",
-#                "class": "new-class-name two",
-#                "id": "my-id-for-textarea", 
-#                "rows": 20,
-#                'cols': 120,
-#            }
-#        )
-#    )
-#    price = forms.DecimalField()
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = [
+            'quantity'
+        ]

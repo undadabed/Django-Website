@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %} {% load crispy_forms_tags %}
+<form method="post" enctype="multipart/form-data" class="form-group">
+  {% csrf_token %}
+  <h1>Do you want to purchase the product "{{ object.title }}"?</h1>
+  {{ form|crispy }}
+  <button type="submit" class="btn btn-success">Purchase</button>
+  <a href="../">Cancel</a>
+</form>
+{% endblock %}

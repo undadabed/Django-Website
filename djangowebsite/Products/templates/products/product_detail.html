@@ -8,11 +8,11 @@
   width="400"
   height="400"
 />
-{% if user == object.seller %}
 <p>{{ object.summary }}</p>
+{% if user == object.seller %}
 <a
   class="nav-item nav-link"
-  id="Delete-item"
+  id="Update-item"
   href="{{ object.get_absolute_url }}update"
   >Update Item</a
 >
@@ -21,5 +21,12 @@
   id="Delete-item"
   href="{{ object.get_absolute_url }}delete"
   >Delete Item</a
+>
+{% else %}
+<a
+  class="nav-item nav-link"
+  id="Purchase-Item"
+  href="{{ object.get_absolute_url }}purchase"
+  >Purchase Item</a
 >
 {% endif %} {% endblock %}
