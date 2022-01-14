@@ -63,7 +63,9 @@ def product_purchase_view(request, id):
         current_form = form.save(commit=False)
         current_form.customer = request.user
         current_form.item = obj
+        current_form.seller = obj.seller
         current_form.save()
+        return redirect('../../cart')
     context = {
         'object': obj,
         'form': form
@@ -98,3 +100,12 @@ def cart_view(request):
         "object_list": cart
     }
     return render(request, "products/cart.html", context)
+
+@login_required(login_url='/login')
+def seller_view(request):
+    user = request.user
+    cart = OrderItem.objects.filter(seller=user.id)
+    context = {
+        "object_list": cart
+    }
+    return render(request, "products/seller_view.html", context)

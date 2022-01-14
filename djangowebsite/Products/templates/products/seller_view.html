@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Orders</h1>
+{% for instance in object_list %}
+<h4>{{ instance.item.title }}</h4>
+<p>Customer: {{ instance.customer }}</p>
+<p>Quantity: {{ instance.quantity }}</p>
+<img
+  class="profile-pic"
+  src="{{ instance.item.display_image.url }}"
+  width="200"
+  height="200"
+/>
+{% endfor %} {% endblock %}

@@ -17,8 +17,9 @@ class Product(models.Model):
         return reverse("products:product-detail", kwargs={"id": self.id})
 
 class OrderItem(models.Model):
-    STATUS = (('Pending','Pending'),('Out for delivery','Out for delivery'),('Delivered','Delivered'))
-    customer = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    status = models.TextField(default="Pending", null=True)
+    customer = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name="customer_user")
+    seller = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name="seller_user")
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
